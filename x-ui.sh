@@ -812,9 +812,7 @@ delete_ports() {
 }
 
 update_geo() {
-    echo -e "${green}\t1.${plain} Loyalsoldier (geoip.dat, geosite.dat)"
-    echo -e "${green}\t2.${plain} chocolate4u (geoip_IR.dat, geosite_IR.dat)"
-    echo -e "${green}\t3.${plain} vuong2023 (geoip_VN.dat, geosite_VN.dat)"
+    echo -e "${green}\t1.${plain} FlyFrg (geoip.dat, geosite.dat)"
     echo -e "${green}\t0.${plain} Back to Main Menu"
     read -p "Choose an option: " choice
 
@@ -826,28 +824,21 @@ update_geo() {
         ;;
     1)
         systemctl stop x-ui
-        rm -f geoip.dat geosite.dat
-        wget -N https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
-        wget -N https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
-        echo -e "${green}Loyalsoldier datasets have been updated successfully!${plain}"
+        rm -f geoip-tm.dat dlc-tm.dat
+        wget -N https://github.com/FlyFrg/gip/releases/latest/download/geoip-tm.dat
+        wget -N https://github.com/FlyFrg/gsite/releases/latest/download/dlc-tm.dat
+        echo -e "${green}FlyFrg datasets have been updated successfully!${plain}"
         restart
         ;;
     2)
         systemctl stop x-ui
-        rm -f geoip_IR.dat geosite_IR.dat
-        wget -O geoip_IR.dat -N https://github.com/chocolate4u/Iran-v2ray-rules/releases/latest/download/geoip.dat
-        wget -O geosite_IR.dat -N https://github.com/chocolate4u/Iran-v2ray-rules/releases/latest/download/geosite.dat
+        rm -f geoip-tm.dat dlc-tm.dat
+        wget -O geoip-tm.dat -N https://github.com/FlyFrg/gip/releases/latest/download/geoip-tm.dat
+        wget -O dlc-tm.dat -N https://github.com/FlyFrg/gsite/releases/latest/download/dlc-tm.dat
         echo -e "${green}chocolate4u datasets have been updated successfully!${plain}"
         restart
         ;;
-    3)
-        systemctl stop x-ui
-        rm -f geoip_VN.dat geosite_VN.dat
-        wget -O geoip_VN.dat -N https://github.com/vuong2023/vn-v2ray-rules/releases/latest/download/geoip.dat
-        wget -O geosite_VN.dat -N https://github.com/vuong2023/vn-v2ray-rules/releases/latest/download/geosite.dat
-        echo -e "${green}vuong2023 datasets have been updated successfully!${plain}"
-        restart
-        ;;
+
     *)
         echo -e "${red}Invalid option. Please select a valid number.${plain}\n"
         update_geo
